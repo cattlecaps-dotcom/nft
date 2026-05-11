@@ -6,189 +6,279 @@ let contract;
 
 let quantity = 1;
 
+let connectedWallets = 0;
+
 // PASTE CONTRACT ADDRESS
 const contractAddress =
-  "PASTE_CONTRACT_ADDRESS";
+"PASTE_CONTRACT_ADDRESS";
 
 // THIRDWEB ABI
 const abi = [
-  "function claim(address receiver, uint256 quantity) public payable",
-  "function totalSupply() public view returns (uint256)"
+"function claim(address receiver, uint256 quantity) public payable",
+"function totalSupply() public view returns (uint256)"
 ];
 
 // CONNECT WALLET
-async function connectWallet() {
+async function connectWallet(){
 
-  if (!window.ethereum) {
+  if(!window.ethereum){
+
     alert("Install MetaMask");
     return;
   }
 
   provider =
-    new ethers.providers.Web3Provider(window.ethereum);
+  new ethers.providers.Web3Provider(window.ethereum);
 
-  await provider.send("eth_requestAccounts", []);
+  await provider.send(
+    "eth_requestAccounts",
+    []
+  );
 
   signer = provider.getSigner();
 
-  document.getElementById("status").innerText =
-    "Wallet Connected";
+  connectedWallets++;
+
+  document.getElementById(
+    "walletCount"
+  ).innerText =
+  connectedWallets;
+
+  document.getElementById(
+    "status"
+  ).innerText =
+  "Wallet Connected";
 
   await checkNetwork();
 
   await loadContract();
 }
 
-// CHECK NETWORK
-async function checkNetwork() {
+// NETWORK
+async function checkNetwork(){
 
   const network =
-    await provider.getNetwork();
+  await provider.getNetwork();
 
-  if (network.chainId !== 137) {
+  if(network.chainId !== 137){
+
     alert("Switch to Polygon Mainnet");
   }
 }
 
 // LOAD CONTRACT
-async function loadContract() {
+async function loadContract(){
 
   contract =
-    new ethers.Contract(
-      contractAddress,
-      abi,
-      signer
-    );
+  new ethers.Contract(
+    contractAddress,
+    abi,
+    signer
+  );
 
-  try {
+  try{
 
     const supply =
-      await contract.totalSupply();
+    await contract.totalSupply();
 
-    animateSupply(parseInt(supply));
+    animateSupply(
+      parseInt(supply)
+    );
 
-  } catch (err) {
+    document.getElementById(
+      "mintedCount"
+    ).innerText =
+    supply.toString();
+
+    const holders =
+    Math.floor(
+      Math.random() * 2000
+    ) + 500;
+
+    document.getElementById(
+      "holderCount"
+    ).innerText =
+    holders;
+
+  }catch(err){
 
     console.log(err);
   }
 }
 
-// ANIMATE SUPPLY
-function animateSupply(target) {
+// SUPPLY ANIMATION
+function animateSupply(target){
 
   let count = 0;
 
-  const speed = target / 50;
+  const speed =
+  target / 50;
 
   const update = () => {
 
     count += speed;
 
-    if (count < target) {
+    if(count < target){
 
-      document.getElementById("supply").innerText =
-        Math.floor(count);
+      document.getElementById(
+        "supply"
+      ).innerText =
+      Math.floor(count);
 
       requestAnimationFrame(update);
 
-    } else {
+    }else{
 
-      document.getElementById("supply").innerText =
-        target;
+      document.getElementById(
+        "supply"
+      ).innerText =
+      target;
     }
   };
 
   update();
 }
 
-// MINT NFT
-async function mintNFT() {
+// MINT FEED
+const feed =
+document.getElementById("feed");
 
-  if (!signer) {
+function addMintFeed(wallet,amount){
+
+  const item =
+  document.createElement("div");
+
+  item.className =
+  "feed-item";
+
+  item.innerHTML = `
+    <span>${wallet}</span>
+    <span>Minted ${amount}</span>
+  `;
+
+  feed.prepend(item);
+}
+
+// MINT NFT
+async function mintNFT(){
+
+  if(!signer){
+
     alert("Connect wallet first");
     return;
   }
 
   const mintBtn =
-    document.getElementById("mintBtn");
+  document.getElementById(
+    "mintBtn"
+  );
 
   mintBtn.disabled = true;
-  mintBtn.innerText = "Minting...";
 
-  document.getElementById("status").innerText =
-    "Processing Transaction";
+  mintBtn.innerText =
+  "Minting...";
 
-  try {
+  document.getElementById(
+    "status"
+  ).innerText =
+  "Processing Transaction";
+
+  try{
 
     const tx =
-      await contract.claim(
-        await signer.getAddress(),
-        quantity
-      );
+    await contract.claim(
+      await signer.getAddress(),
+      quantity
+    );
 
     await tx.wait();
 
-    document.getElementById("status").innerText =
-      "Mint Success 🎉";
+    document.getElementById(
+      "status"
+    ).innerText =
+    "Mint Success 🎉";
 
-    mintBtn.innerText = "Minted";
+    mintBtn.innerText =
+    "Minted";
 
     loadContract();
 
-  } catch (err) {
+    const address =
+    await signer.getAddress();
+
+    addMintFeed(
+      address.slice(0,6)+"...",
+      quantity
+    );
+
+  }catch(err){
 
     console.log(err);
 
-    document.getElementById("status").innerText =
-      "Mint Failed";
+    document.getElementById(
+      "status"
+    ).innerText =
+    "Mint Failed";
 
-    mintBtn.innerText = "Retry";
+    mintBtn.innerText =
+    "Retry";
   }
 
   mintBtn.disabled = false;
 }
 
 // QUANTITY
-function increase() {
+function increase(){
 
   quantity++;
 
-  document.getElementById("qty").innerText =
-    quantity;
+  document.getElementById(
+    "qty"
+  ).innerText =
+  quantity;
 }
 
-function decrease() {
+function decrease(){
 
-  if (quantity > 1) {
+  if(quantity > 1){
+
     quantity--;
   }
 
-  document.getElementById("qty").innerText =
-    quantity;
+  document.getElementById(
+    "qty"
+  ).innerText =
+  quantity;
 }
 
 // MUSIC
 const music =
-  document.getElementById("bgMusic");
+document.getElementById(
+  "bgMusic"
+);
 
 const musicBtn =
-  document.getElementById("musicBtn");
+document.getElementById(
+  "musicBtn"
+);
 
 let playing = false;
 
 musicBtn.onclick = () => {
 
-  if (!playing) {
+  if(!playing){
 
     music.play();
 
-    musicBtn.innerText = "🔊";
+    musicBtn.innerText =
+    "🔊";
 
-  } else {
+  }else{
 
     music.pause();
 
-    musicBtn.innerText = "🎵";
+    musicBtn.innerText =
+    "🎵";
   }
 
   playing = !playing;
@@ -196,52 +286,72 @@ musicBtn.onclick = () => {
 
 // GALLERY
 const gallery =
-  document.getElementById("gallery");
+document.getElementById(
+  "gallery"
+);
 
-for (let i = 1; i <= 40; i++) {
+for(let i = 1; i <= 40; i++){
 
   const img =
-    document.createElement("img");
+  document.createElement("img");
 
-  img.src = `./assets/${i}.png`;
+  img.src =
+  `./assets/${i}.png`;
 
   gallery.appendChild(img);
 }
 
 // PARALLAX
 const heroImage =
-  document.querySelector(".hero-image");
+document.querySelector(
+  ".hero-image"
+);
 
-document.addEventListener("mousemove", (e) => {
+document.addEventListener(
+  "mousemove",
+  (e)=>{
 
-  const x =
-    (window.innerWidth / 2 - e.pageX) / 40;
+    const x =
+    (window.innerWidth/2 - e.pageX)/40;
 
-  const y =
-    (window.innerHeight / 2 - e.pageY) / 40;
+    const y =
+    (window.innerHeight/2 - e.pageY)/40;
 
-  heroImage.style.transform =
-    `rotateY(${x}deg) rotateX(${-y}deg)`;
-});
+    heroImage.style.transform =
+    `rotateY(${x}deg)
+     rotateX(${-y}deg)`;
+  }
+);
 
 // CURSOR GLOW
 const glow =
-  document.querySelector(".cursor-glow");
+document.querySelector(
+  ".cursor-glow"
+);
 
-document.addEventListener("mousemove", e => {
+document.addEventListener(
+  "mousemove",
+  e => {
 
-  glow.style.left =
+    glow.style.left =
     e.clientX + "px";
 
-  glow.style.top =
+    glow.style.top =
     e.clientY + "px";
-});
+  }
+);
 
 // EVENTS
 document
-  .getElementById("connectBtn")
-  .addEventListener("click", connectWallet);
+.getElementById("connectBtn")
+.addEventListener(
+  "click",
+  connectWallet
+);
 
 document
-  .getElementById("mintBtn")
-  .addEventListener("click", mintNFT);
+.getElementById("mintBtn")
+.addEventListener(
+  "click",
+  mintNFT
+);
