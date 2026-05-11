@@ -1,0 +1,19 @@
+{
+  "name": "Cattle Cap #1",
+  "description": "10K unique pixel cattle NFTs.",
+  "image": "ipfs://YOUR_IMAGE_LINK/1.png",
+  "attributes": [
+    {
+      "trait_type": "Eyes",
+      "value": "Laser"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "Top Hat"
+    },
+    {
+      "trait_type": "Fur",
+      "value": "Alien"
+    }
+  ]
+}
