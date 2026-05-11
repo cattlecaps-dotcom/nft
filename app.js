@@ -12,7 +12,7 @@ let connectedWallets = 0;
 const contractAddress =
 "PASTE_CONTRACT_ADDRESS";
 
-// THIRDWEB ABI
+// ABI
 const abi = [
 "function claim(address receiver, uint256 quantity) public payable",
 "function totalSupply() public view returns (uint256)"
@@ -296,7 +296,7 @@ for(let i = 1; i <= 40; i++){
   document.createElement("img");
 
   img.src =
-  `./assets/${i}.png`;
+  `${i}.png`;
 
   gallery.appendChild(img);
 }
@@ -318,8 +318,10 @@ document.addEventListener(
     (window.innerHeight/2 - e.pageY)/40;
 
     heroImage.style.transform =
-    `rotateY(${x}deg)
-     rotateX(${-y}deg)`;
+    `
+    rotateY(${x}deg)
+    rotateX(${-y}deg)
+    `;
   }
 );
 
