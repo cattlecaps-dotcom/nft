@@ -5,7 +5,8 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0" />
 
   <title>Cattle Caps NFT</title>
 
@@ -42,27 +43,31 @@
   <header class="navbar">
 
     <div class="logo-wrap">
-      <img src="./assets/logo.png" class="logo-img">
+      <img src="./assets/logo.png"
+        class="logo-img">
       <span>Cattle Caps</span>
     </div>
 
     <nav>
       <a href="#about">About</a>
       <a href="#gallery">Gallery</a>
-      <a href="#roadmap">Roadmap</a>
       <a href="#rarity">Rarity</a>
+      <a href="#roadmap">Roadmap</a>
     </nav>
 
     <div class="nav-buttons">
       <button id="musicBtn">🎵</button>
-      <button id="connectBtn">Connect Wallet</button>
+      <button id="connectBtn">
+        Connect Wallet
+      </button>
     </div>
 
   </header>
 
   <!-- MUSIC -->
   <audio id="bgMusic" loop>
-    <source src="./assets/music.mp3" type="audio/mp3">
+    <source src="./assets/music.mp3"
+      type="audio/mp3">
   </audio>
 
   <!-- HERO -->
@@ -70,11 +75,14 @@
 
     <div class="hero-left">
 
-      <img src="./assets/3.png" class="stack stack1">
+      <img src="./assets/3.png"
+        class="stack stack1">
 
-      <img src="./assets/2.png" class="stack stack2">
+      <img src="./assets/2.png"
+        class="stack stack2">
 
-      <img src="./assets/1.png" class="hero-image">
+      <img src="./assets/1.png"
+        class="hero-image">
 
     </div>
 
@@ -83,24 +91,76 @@
       <h1>Mint Your Cattle Cap</h1>
 
       <p class="hero-text">
-        10,000 uniquely generated pixel NFTs on Polygon blockchain.
+        10,000 uniquely generated NFTs
+        on Polygon blockchain.
       </p>
 
+      <!-- MINT BOX -->
       <div class="mint-box">
 
         <div class="mint-info">
-          <p>Status: <span id="status">Not Connected</span></p>
-          <p>Price: <span id="price">0.01</span> MATIC</p>
-          <p>Minted: <span id="supply">0</span> / 10000</p>
+
+          <p>Status:
+            <span id="status">
+              Not Connected
+            </span>
+          </p>
+
+          <p>Price:
+            <span id="price">
+              0.01
+            </span>
+            MATIC
+          </p>
+
+          <p>Minted:
+            <span id="supply">
+              0
+            </span>
+            / 10000
+          </p>
+
         </div>
 
+        <!-- QUANTITY -->
         <div class="quantity-box">
-          <button onclick="decrease()">-</button>
+
+          <button onclick="decrease()">
+            -
+          </button>
+
           <span id="qty">1</span>
-          <button onclick="increase()">+</button>
+
+          <button onclick="increase()">
+            +
+          </button>
+
         </div>
 
-        <button id="mintBtn">Mint Now</button>
+        <!-- MINT BUTTON -->
+        <button id="mintBtn">
+          Mint Now
+        </button>
+
+      </div>
+
+      <!-- LIVE STATS -->
+      <div class="live-stats">
+
+        <div class="stat-card">
+          <h3 id="walletCount">0</h3>
+          <p>Wallets Connected</p>
+        </div>
+
+        <div class="stat-card">
+          <h3 id="holderCount">0</h3>
+          <p>Total Holders</p>
+        </div>
+
+        <div class="stat-card">
+          <h3 id="mintedCount">0</h3>
+          <p>Total Minted</p>
+        </div>
 
       </div>
 
@@ -108,29 +168,43 @@
 
   </section>
 
+  <!-- MINT FEED -->
+  <section class="mint-feed">
+
+    <h2>Latest Mints</h2>
+
+    <div id="feed"></div>
+
+  </section>
+
   <!-- GALLERY -->
-  <section id="gallery" class="gallery-section">
+  <section id="gallery"
+    class="gallery-section">
 
     <h2>Collection Preview</h2>
 
-    <div class="gallery-grid" id="gallery"></div>
+    <div class="gallery-grid"
+      id="gallery"></div>
 
   </section>
 
   <!-- ABOUT -->
-  <section id="about" class="info-section">
+  <section id="about"
+    class="info-section">
 
     <h2>About</h2>
 
     <p>
-      Cattle Caps is a collection of 10,000 uniquely generated pixel NFTs with
-      rare traits and legendary combinations.
+      Cattle Caps is a collection of
+      10,000 uniquely generated pixel NFTs
+      with legendary rarity combinations.
     </p>
 
   </section>
 
   <!-- RARITY -->
-  <section id="rarity" class="rarity">
+  <section id="rarity"
+    class="rarity">
 
     <h2>Rarity Explorer</h2>
 
@@ -138,12 +212,12 @@
 
       <div class="rarity-card">
         <h3>Legendary</h3>
-        <p>Laser Eyes + Alien Fur</p>
+        <p>Alien Fur + Laser Eyes</p>
       </div>
 
       <div class="rarity-card">
         <h3>Rare</h3>
-        <p>Zombie Cap + Gold Smile</p>
+        <p>Zombie Fur + Gold Mouth</p>
       </div>
 
       <div class="rarity-card">
@@ -156,7 +230,8 @@
   </section>
 
   <!-- ROADMAP -->
-  <section id="roadmap" class="info-section">
+  <section id="roadmap"
+    class="info-section">
 
     <h2>Roadmap</h2>
 
@@ -169,7 +244,7 @@
 
       <div class="road-card">
         <h3>Phase 2</h3>
-        <p>Whitelist & Community</p>
+        <p>Whitelist Access</p>
       </div>
 
       <div class="road-card">
