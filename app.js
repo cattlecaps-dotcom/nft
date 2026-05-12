@@ -1,5 +1,3 @@
-// app.js
-
 let provider;
 let signer;
 let contract;
@@ -8,7 +6,7 @@ let quantity = 1;
 
 let connectedWallets = 0;
 
-// CONTRACT ADDRESS
+// CONTRACT
 const contractAddress =
 "PASTE_CONTRACT_ADDRESS";
 
@@ -18,7 +16,7 @@ const abi = [
 "function totalSupply() public view returns (uint256)"
 ];
 
-// CONNECT WALLET
+// CONNECT
 async function connectWallet(){
 
   if(!window.ethereum){
@@ -35,7 +33,8 @@ async function connectWallet(){
     []
   );
 
-  signer = provider.getSigner();
+  signer =
+  provider.getSigner();
 
   connectedWallets++;
 
@@ -49,21 +48,7 @@ async function connectWallet(){
   ).innerText =
   "Wallet Connected";
 
-  await checkNetwork();
-
-  await loadContract();
-}
-
-// NETWORK
-async function checkNetwork(){
-
-  const network =
-  await provider.getNetwork();
-
-  if(network.chainId !== 137){
-
-    alert("Switch to Polygon Mainnet");
-  }
+  loadContract();
 }
 
 // LOAD CONTRACT
@@ -107,27 +92,7 @@ async function loadContract(){
   }
 }
 
-// MINT FEED
-const feed =
-document.getElementById("feed");
-
-function addMintFeed(wallet,amount){
-
-  const item =
-  document.createElement("div");
-
-  item.className =
-  "feed-item";
-
-  item.innerHTML = `
-    <span>${wallet}</span>
-    <span>Minted ${amount}</span>
-  `;
-
-  feed.prepend(item);
-}
-
-// MINT NFT
+// MINT
 async function mintNFT(){
 
   if(!signer){
@@ -141,10 +106,10 @@ async function mintNFT(){
     "mintBtn"
   );
 
-  mintBtn.disabled = true;
-
   mintBtn.innerText =
   "Minting...";
+
+  mintBtn.disabled = true;
 
   try{
 
@@ -165,14 +130,6 @@ async function mintNFT(){
     "Minted";
 
     loadContract();
-
-    const address =
-    await signer.getAddress();
-
-    addMintFeed(
-      address.slice(0,6)+"...",
-      quantity
-    );
 
   }catch(err){
 
@@ -253,7 +210,7 @@ document.getElementById(
   "gallery"
 );
 
-// ONLY 12 NFTS
+// 12 NFTS ONLY
 for(let i = 1; i <= 12; i++){
 
   const img =
