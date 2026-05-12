@@ -8,7 +8,7 @@ let quantity = 1;
 
 let connectedWallets = 0;
 
-// PASTE CONTRACT ADDRESS
+// CONTRACT ADDRESS
 const contractAddress =
 "PASTE_CONTRACT_ADDRESS";
 
@@ -81,9 +81,10 @@ async function loadContract(){
     const supply =
     await contract.totalSupply();
 
-    animateSupply(
-      parseInt(supply)
-    );
+    document.getElementById(
+      "supply"
+    ).innerText =
+    supply.toString();
 
     document.getElementById(
       "mintedCount"
@@ -104,39 +105,6 @@ async function loadContract(){
 
     console.log(err);
   }
-}
-
-// SUPPLY ANIMATION
-function animateSupply(target){
-
-  let count = 0;
-
-  const speed =
-  target / 50;
-
-  const update = () => {
-
-    count += speed;
-
-    if(count < target){
-
-      document.getElementById(
-        "supply"
-      ).innerText =
-      Math.floor(count);
-
-      requestAnimationFrame(update);
-
-    }else{
-
-      document.getElementById(
-        "supply"
-      ).innerText =
-      target;
-    }
-  };
-
-  update();
 }
 
 // MINT FEED
@@ -177,11 +145,6 @@ async function mintNFT(){
 
   mintBtn.innerText =
   "Minting...";
-
-  document.getElementById(
-    "status"
-  ).innerText =
-  "Processing Transaction";
 
   try{
 
@@ -290,7 +253,8 @@ document.getElementById(
   "gallery"
 );
 
-for(let i = 1; i <= 40; i++){
+// ONLY 12 NFTS
+for(let i = 1; i <= 12; i++){
 
   const img =
   document.createElement("img");
@@ -300,30 +264,6 @@ for(let i = 1; i <= 40; i++){
 
   gallery.appendChild(img);
 }
-
-// PARALLAX
-const heroImage =
-document.querySelector(
-  ".hero-image"
-);
-
-document.addEventListener(
-  "mousemove",
-  (e)=>{
-
-    const x =
-    (window.innerWidth/2 - e.pageX)/40;
-
-    const y =
-    (window.innerHeight/2 - e.pageY)/40;
-
-    heroImage.style.transform =
-    `
-    rotateY(${x}deg)
-    rotateX(${-y}deg)
-    `;
-  }
-);
 
 // CURSOR GLOW
 const glow =
