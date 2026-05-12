@@ -475,46 +475,59 @@ button{
 
 .gallery-section{
 
-  padding:100px 20px;
+  padding:80px 20px;
 
   text-align:center;
 }
 
 .gallery-section h2{
 
-  font-size:42px;
+  font-size:38px;
 
-  margin-bottom:50px;
+  margin-bottom:40px;
 }
+
+/* SMALL MINIMAL GRID */
 
 .gallery-grid{
 
-  max-width:1000px;
+  max-width:900px;
 
   margin:auto;
 
   display:grid;
 
   grid-template-columns:
-  repeat(4,1fr);
+  repeat(4,140px);
 
-  gap:20px;
+  justify-content:center;
+
+  gap:18px;
 }
+
+/* NFT CARDS */
 
 .gallery-grid img{
 
-  width:100%;
+  width:140px;
+  height:140px;
+
+  object-fit:cover;
 
   border-radius:18px;
 
-  transition:.4s;
+  background:#111;
+
+  transition:.35s;
 
   filter:
   blur(4px)
   brightness(.75);
 
-  opacity:.75;
+  opacity:.8;
 }
+
+/* HOVER */
 
 .gallery-grid img:hover{
 
@@ -523,11 +536,30 @@ button{
   opacity:1;
 
   transform:
-  translateY(-6px)
-  scale(1.02);
+  translateY(-4px)
+  scale(1.03);
 
   box-shadow:
-  0 0 20px rgba(139,124,246,.35);
+  0 0 18px rgba(139,124,246,.35);
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .gallery-grid{
+
+    grid-template-columns:
+    repeat(2,120px);
+
+    gap:14px;
+  }
+
+  .gallery-grid img{
+
+    width:120px;
+    height:120px;
+  }
 }
 
 /* INFO */
