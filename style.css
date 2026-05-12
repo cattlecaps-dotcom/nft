@@ -27,7 +27,6 @@ body{
   justify-content:center;
   align-items:center;
   z-index:99999;
-
   animation:fadeOut 2s forwards;
   animation-delay:2s;
 }
@@ -57,7 +56,6 @@ body{
 }
 
 @keyframes zoom{
-
   0%{
     opacity:0;
     transform:scale(.5);
@@ -90,10 +88,6 @@ body{
   background-size:30px 30px;
 
   z-index:-2;
-}
-
-#particles::after{
-  transform:rotate(180deg);
 }
 
 /* CURSOR */
@@ -142,21 +136,12 @@ body{
   background:#8B7CF6;
   top:-120px;
   left:-120px;
-  animation:float 8s infinite;
 }
 
 .blur2{
   background:#00d4ff;
   bottom:-120px;
   right:-120px;
-  animation:float 10s infinite;
-}
-
-@keyframes float{
-
-  50%{
-    transform:translateY(40px);
-  }
 }
 
 /* NAVBAR */
@@ -324,8 +309,6 @@ button{
   transform:rotate(10deg);
 }
 
-/* NFT WRAPPER */
-
 .hero-image{
 
   width:340px;
@@ -336,32 +319,9 @@ button{
 
   z-index:5;
 
-  animation:
-  floatNFT 5s ease-in-out infinite,
-  glowPulse 3s infinite;
-
   box-shadow:
   0 0 30px rgba(139,124,246,.4);
-
-  transition:.2s;
 }
-
-@keyframes floatNFT{
-
-  50%{
-    transform:translateY(-15px);
-  }
-}
-
-@keyframes glowPulse{
-
-  50%{
-    box-shadow:
-    0 0 60px rgba(139,124,246,.8);
-  }
-}
-
-/* HERO TEXT */
 
 .hero-right{
   max-width:480px;
@@ -497,10 +457,6 @@ button{
   padding:40px;
 }
 
-.mint-feed h2{
-  margin-bottom:20px;
-}
-
 .feed-item{
 
   display:flex;
@@ -518,24 +474,29 @@ button{
 /* GALLERY */
 
 .gallery-section{
-  padding:100px 40px;
+
+  padding:100px 20px;
+
+  text-align:center;
 }
 
 .gallery-section h2{
 
-  text-align:center;
-
-  font-size:48px;
+  font-size:42px;
 
   margin-bottom:50px;
 }
 
 .gallery-grid{
 
+  max-width:1000px;
+
+  margin:auto;
+
   display:grid;
 
   grid-template-columns:
-  repeat(auto-fit,minmax(180px,1fr));
+  repeat(4,1fr);
 
   gap:20px;
 }
@@ -544,15 +505,15 @@ button{
 
   width:100%;
 
-  border-radius:20px;
+  border-radius:18px;
 
   transition:.4s;
 
   filter:
-  blur(6px)
-  brightness(.7);
+  blur(4px)
+  brightness(.75);
 
-  opacity:.6;
+  opacity:.75;
 }
 
 .gallery-grid img:hover{
@@ -562,11 +523,11 @@ button{
   opacity:1;
 
   transform:
-  translateY(-8px)
-  scale(1.03);
+  translateY(-6px)
+  scale(1.02);
 
   box-shadow:
-  0 0 20px rgba(139,124,246,.4);
+  0 0 20px rgba(139,124,246,.35);
 }
 
 /* INFO */
@@ -706,11 +667,11 @@ footer{
     font-size:44px;
   }
 
-  .stack1{
-    left:-20px;
-  }
+  .gallery-grid{
 
-  .stack2{
-    right:-20px;
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:14px;
   }
 }
